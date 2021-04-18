@@ -1,5 +1,15 @@
 {
 	"all": true,
-	"include": ["src/**/*.js"],
+	"include": [
+    "src/**/*.js",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "coverage/**",
+    "node_modules/**",
+    "**/*.d.ts",
+    "**/*.test.ts"
+  ],
+  "sourceMap": true,
 	"reporter": ["text", "html", "lcov"]
 }

@@ -1,0 +1,14 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/public": true,
+    "**/package-lock.json": true,
+    "**/yarn.lock": true
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#520064",
+    "titleBar.activeBackground": "#520064",
+    "titleBar.activeForeground": "#FAFBF4"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "feathers-authentication-management",
-  "description": "Adds sign up verification, forgotten password reset, and other capabilities to local feathers-authentication ",
+  "description": "Adds sign up verification, forgotten password reset, and other capabilities to local feathers-authentication",
   "version": "3.1.0",
   "repository": {
     "type": "git",
@@ -27,20 +27,25 @@
   "engines": {
     "node": ">= 8.12.0"
   },
-  "main": "src/",
+  "main": "dist/",
+  "types": "dist/",
   "directories": {
     "src": "src"
   },
   "scripts": {
+    "preversion": "npm run lint && npm run test && npm run compile",
     "publish": "git push origin --tags && npm run changelog && git push origin",
+    "release:pre": "npm version prerelease && npm publish --tag pre",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
     "changelog": "github_changelog_generator -u feathersjs-ecosystem -p feathers-authentication-management && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
-    "lint": "semistandard src/**/*.js --fix",
-    "mocha": "mocha --opts mocha.opts",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "mocha": "cross-env TS_NODE_PROJECT='tsconfig.test.json' mocha --require ts-node/register --timeout 40000",
     "coverage": "nyc npm run mocha",
-    "test": "npm run lint && npm run coverage"
+    "test": "npm run coverage",
+    "compile": "shx rm -rf dist/ && tsc",
+    "docs": "vitepress dev docs"
   },
   "semistandard": {
     "env": [
@@ -48,20 +53,41 @@
     ]
   },
   "dependencies": {
-    "@feathersjs/authentication": "^4.3.0",
-    "@feathersjs/authentication-local": "^4.3.0",
-    "@feathersjs/errors": "^4.3.0",
-    "bcryptjs": "^2.3.0",
-    "debug": "^4.1.0",
-    "feathers-hooks-common": "^5.0.3"
+    "@feathersjs/authentication": "^4.5.11",
+    "@feathersjs/authentication-client": "^4.5.11",
+    "@feathersjs/authentication-local": "^4.5.11",
+    "@feathersjs/errors": "^4.5.11",
+    "bcryptjs": "^2.4.3",
+    "debug": "^4.3.1",
+    "feathers-hooks-common": "^5.0.5",
+    "lodash": "^4.17.21",
+    "type-fest": "^0.21.2"
   },
   "devDependencies": {
-    "@feathersjs/feathers": "^4.3.0",
-    "chai": "^4.2.0",
-    "feathers-memory": "^4.0.0",
-    "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^6.2.0",
+    "@feathersjs/feathers": "^4.5.11",
+    "@feathersjs/socketio": "^4.5.11",
+    "@feathersjs/transport-commons": "^4.5.11",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/chai": "^4.2.15",
+    "@types/debug": "^4.1.5",
+    "@types/lodash": "^4.14.168",
+    "@types/mocha": "^8.2.1",
+    "@types/node": "^14.14.31",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "chai": "^4.3.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.20.0",
+    "eslint-config-standard-with-typescript": "^20.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "feathers-memory": "^4.1.0",
+    "mocha": "^8.3.0",
     "nyc": "^15.0.1",
-    "semistandard": "^11.0.0"
+    "shx": "^0.3.3",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5",
+    "vitepress": "^0.13.0"
   }
 }

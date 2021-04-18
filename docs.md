@@ -82,23 +82,31 @@ Leaving it a pure API server, lets it be used with both native and browser clien
 
 ## Contents
 
-- [The Service](#service)
-- [Client](#client)
-  - [Using Feathers' method calls](#using-feathers-method-calls)
-  - [Provided service wrappers](#provided-service-wrappers)
-  - [HTTP fetch](#http-fetch)
-  - [React's redux](#react-redux)
-    - [Dispatching services](#dispatching-services)
-    - [Dispatching authentication](#dispatching-authentication)
-  - [Vue 2.0 (docs to do)](#vue)
-- [Hooks](#hooks)
-- [Multiple services](#multiple-services)
-- [Database](#database)
-- [Routing](#routing)
-- [Security](#security)
-- [Docs](#docs)
-- [Configurable](#configurable)
-- [Tests](#tests)
+- [feathers-authentication-management](#feathers-authentication-management)
+    - [Multiple communication channels:](#multiple-communication-channels)
+    - [Capabilities:](#capabilities)
+    - [User notifications may be sent for:](#user-notifications-may-be-sent-for)
+    - [May be used with](#may-be-used-with)
+  - [Contents](#contents)
+  - [Service](#service)
+  - [Client](#client)
+    - [Using Feathers method calls](#using-feathers-method-calls)
+    - [Provided service wrappers](#provided-service-wrappers)
+    - [HTTP fetch](#http-fetch)
+    - [React Redux](#react-redux)
+      - [Dispatching services](#dispatching-services)
+      - [Dispatching authentication](#dispatching-authentication)
+    - [Vue](#vue)
+  - [Hooks](#hooks)
+    - [`verifyHooks.addVerification( path = 'authManagement' )`](#verifyhooksaddverification-path--authmanagement-)
+    - [`verifyHooks.isVerified()`](#verifyhooksisverified)
+  - [Multiple services](#multiple-services)
+  - [Database](#database)
+  - [Routing](#routing)
+  - [Security](#security)
+  - [Docs](#docs)
+  - [Configurable](#configurable)
+  - [Tests](#tests)
 
 ## Service
 
@@ -497,7 +505,7 @@ You should add them to your user model if your database uses models.
   resetToken: { type: String },
   resetShortToken: { type: String },
   resetExpires: { type: Date }, // or a long integer
-  resetAttempts: { type: Number },
+  resetAttempts: { type: Number }
 }
 ```
 
